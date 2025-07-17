@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interview Q&A</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-weight: bold;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .qa-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .question {
+      font-weight: bold;
+      color: #1a73e8;
+      margin-top: 15px;
+    }
+
+    .answer {
+      margin-left: 15px;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      button {
+        flex: 1 1 100%;
+        font-size: 16px;
+      }
+
+      .qa-container {
+        padding: 15px;
+      }
+
+      .question {
+        font-size: 16px;
+      }
+
+      .answer {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Interview Questions & Answers</h2>
+
+  <div class="button-group">
+    <button onclick="showQA('java')">Java</button>
+    <button onclick="showQA('python')">Python</button>
+    <button onclick="showQA('javafw')">Java Framework</button>
+    <button onclick="showQA('ml')">Machine Learning</button>
+    <button onclick="showQA('ai')">AI / ML</button>
+  </div>
+
+  <div class="qa-container" id="qaContainer"></div>
+
+  <script>
+    const data = {
+      java: [
+        ["What is Java?", "Java is a high-level, class-based, object-oriented programming language."],
+        ["What is JVM?", "JVM stands for Java Virtual Machine. It runs Java bytecode."],
+        ["What is Inheritance?", "Inheritance allows one class to inherit fields and methods from another."],
+        ["Difference between JDK and JRE?", "JDK is Java Development Kit; JRE is Java Runtime Environment."],
+        ["What is Polymorphism?", "Polymorphism means many forms — method overloading and overriding."],
+        ["What is Encapsulation?", "Encapsulation is wrapping data and methods together."],
+        ["What are Constructors?", "Constructors are special methods called when an object is created."],
+        ["What is an Interface?", "An interface is a reference type that can contain abstract methods."],
+        ["What is Abstraction?", "Abstraction hides internal details and shows only functionality."],
+        ["What is final keyword?", "It is used to define constants or prevent inheritance/overriding."],
+        ["Difference between ArrayList and LinkedList?", "ArrayList is backed by array, LinkedList by nodes."],
+        ["What is static keyword?", "It means the field or method belongs to the class."],
+        ["Explain Exception Handling.", "Try-catch blocks are used to handle exceptions."],
+        ["What is the difference between == and .equals()?", "== checks reference, .equals() checks value."],
+        ["What is Multithreading?", "Multithreading allows concurrent execution of two or more threads."]
+      ],
+      python: [
+        ["What is Python?", "Python is a high-level, interpreted, dynamically typed language."],
+        ["What is PEP 8?", "PEP 8 is Python's style guide for writing clean code."],
+        ["What are Python Data Types?", "int, float, str, list, tuple, set, dict."],
+        ["What is a list comprehension?", "Short way to create lists using a single line for loop."],
+        ["Difference between list and tuple?", "List is mutable, tuple is immutable."],
+        ["What is a dictionary?", "A collection of key-value pairs."],
+        ["What is a lambda function?", "Anonymous function written with the lambda keyword."],
+        ["What is *args and **kwargs?", "*args = variable arguments, **kwargs = keyword args."],
+        ["What is a module?", "A file containing Python definitions and code."],
+        ["What is inheritance in Python?", "One class can inherit methods and attributes from another."],
+        ["What is an exception?", "An error that occurs during program execution."],
+        ["What is a decorator?", "A function that modifies another function."],
+        ["What is the use of 'with'?", "Used for managing resources like files."],
+        ["Difference between 'is' and '==''?", "'is' checks identity, '==' checks equality."],
+        ["What is NumPy?", "A Python library for numerical operations."]
+      ],
+      javafw: [
+        ["What is Spring Framework?", "Spring is a powerful Java application framework."],
+        ["What is Spring Boot?", "Spring Boot makes it easy to create stand-alone Spring apps."],
+        ["What is Dependency Injection?", "It allows injecting objects into a class."],
+        ["What is Hibernate?", "An ORM tool for mapping Java objects to DB tables."],
+        ["What is @Autowired?", "Used to auto-inject beans in Spring."],
+        ["What is Controller in Spring MVC?", "Handles web requests and returns views."],
+        ["What is JPA?", "Java Persistence API used for ORM in Java."],
+        ["What is a Bean?", "Object managed by the Spring container."],
+        ["Difference between GET and POST?", "GET fetches data, POST submits data."],
+        ["What is REST API?", "API that follows REST principles."],
+        ["What is @RestController?", "Combines @Controller and @ResponseBody."],
+        ["What is AOP?", "Aspect-Oriented Programming separates cross-cutting concerns."],
+        ["What is @Transactional?", "Used for managing database transactions."],
+        ["How to handle exceptions in Spring?", "Using @ControllerAdvice and @ExceptionHandler."],
+        ["What is application.properties?", "Used to configure Spring Boot applications."]
+      ],
+      ml: [
+        ["What is Machine Learning?", "ML is a field that gives machines the ability to learn from data."],
+        ["Types of ML?", "Supervised, Unsupervised, Reinforcement Learning."],
+        ["What is Overfitting?", "Model fits training data too well and performs poorly on new data."],
+        ["What is Underfitting?", "Model is too simple and misses patterns in data."],
+        ["What is a feature?", "An individual measurable property of the data."],
+        ["What is training data?", "Data used to train the ML model."],
+        ["What is testing data?", "Data used to test model accuracy."],
+        ["What is cross-validation?", "Technique to test model performance with different data splits."],
+        ["What is a confusion matrix?", "A table to evaluate classification models."],
+        ["What is precision and recall?", "Precision: TP / (TP+FP), Recall: TP / (TP+FN)."],
+        ["What is accuracy?", "Correct predictions / Total predictions."],
+        ["What is bias?", "Error from simplifying assumptions in the model."],
+        ["What is variance?", "Model’s sensitivity to small fluctuations in the training set."],
+        ["What is gradient descent?", "Optimization algorithm for minimizing loss function."],
+        ["What is a decision tree?", "A flowchart-like model used for decision making."]
+      ],
+      ai: [
+        ["What is Artificial Intelligence?", "AI is the simulation of human intelligence by machines."],
+        ["Difference between AI and ML?", "ML is a subset of AI focused on learning from data."],
+        ["What is NLP?", "Natural Language Processing allows computers to understand language."],
+        ["What is Deep Learning?", "Subset of ML using neural networks with many layers."],
+        ["What is a neural network?", "A system of algorithms modeled after the human brain."],
+        ["What is reinforcement learning?", "Learning by trial and error using rewards."],
+        ["What is computer vision?", "Enabling machines to interpret visual data."],
+        ["What is supervised learning?", "Learning from labeled data."],
+        ["What is unsupervised learning?", "Learning from unlabeled data."],
+        ["What is a chatbot?", "AI that can simulate conversation with users."],
+        ["What is Turing Test?", "A test to determine if a machine shows human-like intelligence."],
+        ["What is GAN?", "Generative Adversarial Network: generates realistic data."],
+        ["What is TensorFlow?", "An open-source deep learning framework by Google."],
+        ["What is model accuracy?", "Measure of how well model predictions match actual outcomes."],
+        ["What is AI ethics?", "Moral considerations in developing AI systems."]
+      ]
+    };
+
+    function showQA(topic) {
+      const container = document.getElementById('qaContainer');
+      container.innerHTML = '';
+      const qaList = data[topic];
+      qaList.forEach(([q, a], index) => {
+        const qElem = document.createElement('div');
+        qElem.className = 'question';
+        qElem.textContent = `${index + 1}. ${q}`;
+        const aElem = document.createElement('div');
+        aElem.className = 'answer';
+        aElem.textContent = a;
+        container.appendChild(qElem);
+        container.appendChild(aElem);
+      });
+    }
+  </script>
+</body>
+</html>
