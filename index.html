@@ -1,4 +1,275 @@
+
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interview Q&A</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f0f0f5;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 12px 20px;
+      font-weight: bold;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .qa-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .qa-item {
+      margin-bottom: 15px;
+    }
+    .question {
+      font-weight: bold;
+      color: #1a73e8;
+    }
+    .answer {
+      margin-left: 15px;
+    }
+    @media (max-width: 600px) {
+      button {
+        flex: 1 1 100%;
+        font-size: 16px;
+      }
+      .qa-container {
+        padding: 15px;
+      }
+      .question {
+        font-size: 16px;
+      }
+      .answer {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Interview Questions & Answers</h2>
+
+  <div class="button-group">
+    <button onclick="showQA('java')">Java</button>
+    <button onclick="showQA('python')">Python</button>
+    <button onclick="showQA('javafw')">Java Framework</button>
+    <button onclick="showQA('ml')">Machine Learning</button>
+    <button onclick="showQA('ai')">AI / ML</button>
+  </div>
+
+  <div class="qa-container" id="qaContainer"></div>
+
+  <script>
+    const data = {
+      java: [
+        ["What is Java?", "Java is a high-level, object‑oriented programming language."],
+        ["Define JVM.", "Java Virtual Machine – runs Java bytecode."],
+        ["Define JRE.", "Java Runtime Environment – includes JVM and libraries."],
+        ["Define JDK.", "Java Development Kit – tools for Java development."],
+        ["What is inheritance?", "Mechanism to derive new class from existing one."],
+        ["Explain polymorphism.", "Ability for objects to take multiple forms."],
+        ["What is abstraction?", "Hiding internal details and showing functionality."],
+        ["What is encapsulation?", "Wrapping data and methods within classes."],
+        ["Define interface.", "Abstract type defining methods without implementation."],
+        ["Define abstract class.", "Class that can have abstract (unimplemented) methods."],
+        ["What is method overloading?", "Multiple methods with same name but different parameters."],
+        ["What is method overriding?", "Subclass provides implementation for parent method."],
+        ["Explain final keyword.", "Prevents inheritance, method overriding or variable change."],
+        ["What is static modifier?", "Belongs to class rather than instance."],
+        ["Define constructor.", "Special method to initialize new objects."],
+        ["Define default constructor.", "Constructor with no parameters generated if none provided."],
+        ["What is an exception?", "Event disrupting normal program flow."],
+        ["Difference between checked & unchecked exceptions?", "Checked must be caught; unchecked may not."],
+        ["What is try-catch?", "Blocks to handle exceptions."],
+        ["What is finally?", "Runs code regardless of exception."],
+        ["Define multithreading.", "Concurrent execution of multiple threads."],
+        ["What is synchronized?", "Keyword to control thread access to resources."],
+        ["Explain Collection Framework.", "Set of interfaces and classes for data structures."],
+        ["What's List vs Set?", "List allows duplicates/ordered; Set unique/unordered."],
+        ["Difference between ArrayList & LinkedList?", "ArrayList is array-backed, LinkedList is node-based."],
+        ["What is Map?", "Stores key-value pairs."],
+        ["Difference between HashMap & TreeMap?", "HashMap unordered, TreeMap sorted."],
+        ["Explain garbage collection.", "Automatic memory management by JVM."],
+        ["What is memory leak in Java?", "Unused objects not collected by GC."],
+        ["What are annotations?", "Metadata for classes, methods, fields."]
+      ],
+      python: [
+        ["What is Python?", "High-level, interpreted, dynamically typed language."],
+        ["Define PEP 8.", "Style guide for Python code."],
+        ["What are Python data types?", "int, float, str, list, tuple, set, dict."],
+        ["Explain list vs tuple.", "List mutable; tuple immutable."],
+        ["Define dictionary.", "Key-value mapping type."],
+        ["What is list comprehension?", "Concise way to create lists."],
+        ["Explain lambda.", "Anonymous inline functions."],
+        ["Define *args.", "Variable positional arguments."],
+        ["Define **kwargs.", "Variable keyword arguments."],
+        ["What is a module?", "File containing Python code and definitions."],
+        ["What is a package?", "Folder of Python modules with __init__.py."],
+        ["Explain import vs from import.", "Import module vs import specific item."],
+        ["Difference between range and xrange.", "Python 3’s range is Python 2’s xrange."],
+        ["What is slicing?", "Extracting parts of sequences via indices."],
+        ["Define decorator.", "Function modifying behavior of another."],
+        ["What is generator?", "Function using yield to produce a sequence."],
+        ["What is iterator?", "Object with __iter__() and __next__() methods."],
+        ["Explain context manager.", "Manages resources via with statement."],
+        ["What is exception handling?", "Use try-except-finally blocks."],
+        ["Difference between is and ==.", "is checks identity; == checks value."],
+        ["What is duck typing?", "Type determined by behavior not class."],
+        ["Explain GIL.", "Global interpreter lock in CPython."],
+        ["What is multithreading in Python?", "Limited by GIL but IO-bound threads are effective."],
+        ["Define multiprocessing.", "Running parallel processes bypassing GIL."],
+        ["What is virtual environment?", "Isolated Python dependencies per project."],
+        ["Explain map, filter, reduce.", "Functional programming tools for sequences."],
+        ["What is NumPy?", "Library for array operations."],
+        ["What is Pandas?", "Tabular data handling library."],
+        ["Define unit tests in Python.", "Testing modules like unittest or pytest."],
+        ["What is pip?", "Package installer for Python."]
+      ],
+      javafw: [
+        ["What is Spring?", "Framework for Java enterprise applications."],
+        ["Define Spring Boot.", "Simplifies Spring app creation with auto‑configuration."],
+        ["What is Dependency Injection?", "Injecting objects rather than creating them."],
+        ["What are Beans?", "Objects managed by Spring container."],
+        ["Explain @Autowired.", "Automatically injects bean dependencies."],
+        ["Define Spring MVC.", "Model-View-Controller framework for web apps."],
+        ["What is @Controller?", "Marks class as Spring MVC controller."],
+        ["What is @RestController?", "Controller that returns JSON/XML responses."],
+        ["Explain REST API.", "Stateless web service architecture using HTTP."],
+        ["What is Hibernate?", "ORM for Java to map objects to DB tables."],
+        ["Define JPA.", "Java Persistence API for ORM."],
+        ["What is @Transactional?", "Defines transaction boundaries for methods."],
+        ["Explain application.properties.", "Configuration values for Spring Boot."],
+        ["What is Maven?", "Dependency and build management tool."],
+        ["Define Gradle.", "Flexible build automation tool."],
+        ["What is Actuator?", "Spring Boot feature for metrics and health checks."],
+        ["Explain Spring Security.", "Secures apps via authentication/authorization."],
+        ["What is CORS?", "Cross-Origin Resource Sharing for cross‑domain requests."],
+        ["Define AOP.", "Aspect-Oriented Programming for cross-cutting concerns."],
+        ["What is @Aspect?", "Defines aspect in AOP."],
+        ["Explain advice types.", "Before, After, Around advice in AOP."],
+        ["What is a Filter vs Interceptor?", "Filter is Servlet; interceptor is Spring MVC."],
+        ["Define WebSocket in Spring.", "Real-time bidirectional communication."],
+        ["What is RestTemplate?", "Client to consume RESTful web services."],
+        ["Define Spring Data JPA.", "Abstraction over JPA with repository pattern."],
+        ["What is @Query?", "Custom JPQL/SQL query annotation."],
+        ["Explain Profiles.", "Config sets per environment (dev/prod/test)."],
+        ["What is Actuator Endpoints?", "Health, metrics, info, etc."],
+        ["How to handle exceptions globally?", "@ControllerAdvice with @ExceptionHandler."]
+      ],
+      ml: [
+        ["What is Machine Learning?", "AI subfield focusing on learning from data."],
+        ["Types of ML?", "Supervised, Unsupervised, Reinforcement."],
+        ["Define supervised learning.", "Learning from labeled examples."],
+        ["Define unsupervised learning.", "Finding patterns in unlabeled data."],
+        ["Explain reinforcement learning.", "Learning via rewards/penalties."],
+        ["What is a feature?", "Input variable used for learning."],
+        ["What is a label?", "Target output in supervised learning."],
+        ["Explain training vs testing data.", "Training for learning; testing for evaluation."],
+        ["What is cross-validation?", "Technique to validate model generalization."],
+        ["Define overfitting.", "Model learns noise and won't generalize."],
+        ["Define underfitting.", "Model too simple to capture patterns."],
+        ["What is bias-variance tradeoff?", "Balance between bias and variance errors."],
+        ["Define accuracy.", "Percentage of correct predictions."],
+        ["Explain precision.", "True positives / (true positives+false positives)."],
+        ["Explain recall.", "True positives / (true positives+false negatives)."],
+        ["What is F1-score?", "Harmonic mean of precision and recall."],
+        ["Define confusion matrix.", "Table layout of predictions vs actuals."],
+        ["What is gradient descent?", "Optimization algorithm to minimize loss."],
+        ["What is learning rate?", "Step size used in gradient descent."],
+        ["What is a decision tree?", "Tree-shaped model of decisions."],
+        ["Explain random forest.", "Ensemble of decision trees."],
+        ["What is SVM?", "Support Vector Machine classifier."],
+        ["What is k‑nearest neighbors?", "Instance-based classifier using neighbors."],
+        ["Define PCA.", "Dimensionality reduction technique."],
+        ["What is clustering?", "Grouping similar data points."],
+        ["Explain k‑means.", "Clustering algorithm partitioning into k groups."],
+        ["What is ROC curve?", "Graph of true positive vs false positive rates."],
+        ["Define AUC.", "Area under ROC curve."],
+        ["What is regularization?", "Technique to prevent overfitting."],
+        ["Explain L1 vs L2 regularization.", "L1 adds abs weights, L2 squares weights."]
+      ],
+      ai: [
+        ["What is AI?", "Simulation of human intelligence by machines."],
+        ["Difference AI vs ML.", "ML is subset of AI focused on learning."],
+        ["Define supervised learning.", "Learning with labeled data."],
+        ["Define unsupervised learning.", "Learning patterns without labels."],
+        ["What is reinforcement learning?", "Learning via reward-based feedback."],
+        ["Explain deep learning.", "Neural networks with many layers."],
+        ["What is a neural network?", "Model inspired by brain’s neuron connections."],
+        ["Define NLP.", "Natural language processing – computers understanding text."],
+        ["Explain computer vision.", "Interpreting and processing images/videos."],
+        ["What is a chatbot?", "AI program to simulate human conversation."],
+        ["Define Turing Test.", "Test whether machine shows human-like behavior."],
+        ["What is sentiment analysis?", "Detecting emotion/opinion from text."],
+        ["Explain speech recognition.", "Transcribing spoken words to text."],
+        ["What is GAN?", "Generative Adversarial Network for realistic data."],
+        ["Define CNN.", "Convolutional Neural Network for image tasks."],
+        ["Define RNN.", "Recurrent Neural Network for sequential data."],
+        ["What is LSTM?", "Long Short-Term Memory – type of RNN."],
+        ["What is reinforcement in AI?", "Learning via actions and rewards."],
+        ["Explain AI ethics.", "Principles ensuring responsible AI use."],
+        ["What is computer vision?", "Machine interpretation of visual information."],
+        ["Define TensorFlow.", "Open-source ML/DL framework by Google."],
+        ["Define PyTorch.", "DL framework by Facebook."],
+        ["What is transfer learning?", "Pre-trained model adapted for new tasks."],
+        ["Explain AI bias.", "Biases in training data leading to unfair outcomes."],
+        ["What is edge AI?", "Running AI models on devices rather than cloud."],
+        ["Define autonomous agents.", "Systems acting on behalf of users."],
+        ["What is knowledge graph?", "Graph structure representing entities & relations."],
+        ["Explain swarm intelligence.", "Collective behavior for problem-solving."],
+        ["What is fuzzy logic?", "Logic allowing degrees of truth."]
+      ]
+    };
+
+    function showQA(topic) {
+      const container = document.getElementById('qaContainer');
+      container.innerHTML = '';
+      data[topic].forEach(([q, a], i) => {
+        const item = document.createElement('div');
+        item.className = 'qa-item';
+        item.innerHTML = `<div class="question">${i+1}. ${q}</div><div class="answer">${a}</div>`;
+        container.appendChild(item);
+      });
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -200,4 +471,4 @@
     }
   </script>
 </body>
-</html>
+</html>-->
